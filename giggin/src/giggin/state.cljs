@@ -1,10 +1,6 @@
 (ns giggin.state
   (:require [reagent.core :as r]))
 
-
-(def gigs(r/atom {}))
-gigs
-
 (def gigs (r/atom {:gig-01 {:id :gig-01
                             :title "Macaron"
                             :artist "Baher Khairy"

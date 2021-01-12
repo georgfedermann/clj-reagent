@@ -21,7 +21,3 @@
   (r/render
     [app]
     (.getElementById js/document "app")))
-
-(def book {:author "me"})
-
-(println book)
