@@ -8,6 +8,10 @@
 
 (defn orders []
   [:aside
+   (if (empty? @state/orders)
+   [:div.empty
+    [:div.title "You don't have any orders"]
+    [:div.subtitle "Cick on a + button to add an order"]]
    [:div.order
     [:div.gig__body
      (for [[id quant] @state/orders] ;; e.g. {:gig-11 3, :gig-06 2, :gig-05 8, :gig-09 3}
@@ -31,4 +35,4 @@
        [:div.price (total)]]
       [:button.btn.btn--link.tooltip {:data-tooltip "Remove all"
                                       :on-click (fn [] (reset! state/orders {}))}
-       [:i.icon.icon--delete]]]]]])
+       [:i.icon.icon--delete]]]]])])
