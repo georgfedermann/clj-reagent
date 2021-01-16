@@ -1,5 +1,6 @@
 (ns giggin.components.gigs
-  (:require [giggin.state :as state]))
+  (:require [giggin.helpers :as helpers]
+            [giggin.state :as state]))
 
 (defn gigs []
   ;; add element <div class="gigs" /> and inside display all the
@@ -17,5 +18,5 @@
            {:data-tooltip "Add to order"
             :on-click (fn [] (swap! state/orders update id inc))}
            [:i.icon.icon--plus]] title]
-         [:p.gig__price price]
+         [:p.gig__price (helpers/format-price price)]
          [:p.gig__desc desc]]])]])

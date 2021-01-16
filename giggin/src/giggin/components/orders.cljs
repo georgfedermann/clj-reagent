@@ -1,5 +1,6 @@
 (ns giggin.components.orders
-  (:require [giggin.state :as state]))
+  (:require [giggin.helpers :as helpers]
+            [giggin.state :as state]))
 
 (defn total []
   (->> @state/orders
@@ -22,7 +23,8 @@
         [:div.content
          [:p.title (str (get-in @state/gigs [id :title]) " \u00D7 " quant)]]
         [:div.action
-         [:div.price (* (get-in @state/gigs [id :price]) quant)]
+         [:div.price (-> (* (get-in @state/gigs [id :price]) quant)
+                         (helpers/format-price))]
          ;; add event listener to remove items from the order list
          [:button.btn.btn--link.tooltip {:data-tooltip "Remove"
                                          :on-click (fn [] (swap! state/orders dissoc id))}
@@ -32,7 +34,7 @@
      [:div.item
       [:div.content "Total"]
       [:div.action
-       [:div.price (total)]]
+       [:div.price (helpers/format-price (total))]]
       [:button.btn.btn--link.tooltip {:data-tooltip "Remove all"
                                       :on-click (fn [] (reset! state/orders {}))}
        [:i.icon.icon--delete]]]]])])
